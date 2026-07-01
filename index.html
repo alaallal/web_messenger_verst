@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verst · Мессенджер</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Блок авторизации -->
+    <div id="auth-block" class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <span class="logo">✧ Verst</span>
+                <span class="subtitle">Войдите или зарегистрируйтесь</span>
+            </div>
+            <form id="auth-form" onsubmit="return false;">
+                <div class="input-group">
+                    <input type="text" id="auth-username" placeholder="Имя пользователя" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="auth-password" placeholder="Пароль" required>
+                </div>
+                <div class="input-group" id="email-group" style="display: none;">
+                    <input type="email" id="auth-email" placeholder="Email">
+                </div>
+                <div class="auth-buttons">
+                    <button type="button" id="login-btn" class="btn-primary">Войти</button>
+                    <button type="button" id="register-btn" class="btn-secondary" style="display:none;">Регистрация</button>
+                </div>
+                <div id="auth-error" class="error-message"></div>
+            </form>
+            <div class="auth-toggle">
+                <span id="toggle-text">Нет аккаунта?</span>
+                <button id="toggle-btn" class="link-btn">Зарегистрироваться</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основное приложение -->
+    <div id="app-block" class="app-container" style="display: none;">
+        <!-- Боковая панель -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="user-info" id="user-info">
+                    <img id="user-avatar" src="/static/default_avatar.png" alt="Avatar" class="avatar-small" style="cursor:pointer;">
+                    <span id="user-displayname" class="username">Пользователь</span>
+                    <input type="file" id="avatar-input" accept="image/*" style="display:none;">
+                </div>
+                <button id="logout-btn" class="logout-btn" title="Выйти">⏻</button>
+            </div>
+            <div class="sidebar-actions">
+                <button id="create-group-btn" class="action-btn">➕ Создать группу</button>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" id="search-input" placeholder="Поиск чатов или пользователей...">
+                <div id="search-results" class="search-results"></div>
+            </div>
+            <div id="chat-list" class="chat-list">
+                <!-- Чаты -->
+            </div>
+        </aside>
+
+        <!-- Область чата -->
+        <main class="chat-area">
+            <div class="chat-header" id="chat-header">
+                <span id="chat-name">Выберите кому написать</span>
+                <div id="chat-actions" style="display: none;">
+                    <button id="add-user-btn" class="action-btn" title="Добавить участника">➕</button>
+                    <button id="remove-user-btn" class="action-btn danger" title="Удалить участника">➖</button>
+                </div>
+            </div>
+            <div id="msg-container" class="messages-scroll-area">
+                <div class="empty-chat">Выберите чат, чтобы начать общение</div>
+            </div>
+            <div class="input-panel">
+                <input type="file" id="file-input" style="display: none;">
+                <button id="attach-btn" class="media-btn" title="Прикрепить файл">📎</button>
+                <button id="mic-btn" class="media-btn" title="Голосовое сообщение">🎙️</button>
+                <input type="text" id="msg-input" placeholder="Сообщение..." disabled>
+                <button id="send-btn" class="btn-send" disabled>➤</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Модальное окно для создания группы / добавления участников -->
+    <div id="modal-overlay" class="modal-overlay" style="display:none;">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="modal-title">Создать группу</h3>
+                <button class="modal-close" id="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <input type="text" id="modal-group-name" placeholder="Название группы">
+                </div>
+                <div class="input-group">
+                    <input type="text" id="modal-user-search" placeholder="Поиск пользователей...">
+                    <div id="modal-search-results" class="search-results" style="display:block; position:static; margin-top:8px;"></div>
+                </div>
+                <div id="modal-selected-users" class="selected-users">
+                    <span class="label">Выбрано: <span id="selected-count">0</span></span>
+                    <div id="selected-list" class="user-chips"></div>
+                </div>
+                <button id="modal-submit-btn" class="btn-primary">Создать</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
